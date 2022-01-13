@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:concentric_transition/concentric_transition.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(OnboardingExample());
@@ -26,20 +25,22 @@ class OnboardingExample extends StatelessWidget {
       icon: Icons.format_size,
       title: "Choose your\ninterests",
       textColor: Colors.white,
-      bgColor: Color(0xFFFDBFDD),
+      bgColor: const Color(0xFFFDBFDD),
     ),
     PageData(
       icon: Icons.hdr_weak,
       title: "Drag and\ndrop to move",
-      bgColor: Color(0xFFFFFFFF),
+      bgColor: const Color(0xFFFFFFFF),
     ),
     PageData(
       icon: Icons.bubble_chart,
       title: "Local news\nstories",
-      bgColor: Color(0xFF0043D0),
+      bgColor: const Color(0xFF0043D0),
       textColor: Colors.white,
     ),
   ];
+
+  OnboardingExample({Key? key}) : super(key: key);
 
   List<Color> get colors => pages.map((p) => p.bgColor).toList();
 
@@ -50,11 +51,11 @@ class OnboardingExample extends StatelessWidget {
       home: Scaffold(
         body: ConcentricPageView(
           colors: colors,
-//          opacityFactor: 1.0,
-//          scaleFactor: 0.0,
+          opacityFactor: 1.0,
+          scaleFactor: 1.0,
           radius: 30,
           curve: Curves.ease,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
 //          verticalPosition: 0.7,
 //          direction: Axis.vertical,
 //          itemCount: pages.length,
@@ -63,26 +64,24 @@ class OnboardingExample extends StatelessWidget {
             PageData page = pages[index % pages.length];
             // For example scale or transform some widget by [value] param
             //            double scale = (1 - (value.abs() * 0.4)).clamp(0.0, 1.0);
-            return Container(
-              child: Theme(
-                data: ThemeData(
-                  textTheme: TextTheme(
-                    headline6: TextStyle(
-                      color: page.textColor,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Helvetica',
-                      letterSpacing: 0.0,
-                      fontSize: 17,
-                    ),
-                    subtitle2: TextStyle(
-                      color: page.textColor,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 18,
-                    ),
+            return Theme(
+              data: ThemeData(
+                textTheme: TextTheme(
+                  headline6: TextStyle(
+                    color: page.textColor,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Helvetica',
+                    letterSpacing: 0.0,
+                    fontSize: 17,
+                  ),
+                  subtitle2: TextStyle(
+                    color: page.textColor,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 18,
                   ),
                 ),
-                child: PageCard(page: page),
               ),
+              child: PageCard(page: page),
             );
           },
         ),
@@ -102,14 +101,14 @@ class PageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 30.0,
       ),
       child: Column(
 //        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _buildPicture(context),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           _buildText(context),
         ],
       ),
@@ -133,14 +132,14 @@ class PageCard extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(60.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(60.0)),
         color: page.bgColor
 //            .withBlue(page.bgColor.blue - 40)
             .withGreen(page.bgColor.green + 20)
             .withRed(page.bgColor.red - 100)
             .withAlpha(90),
       ),
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 140,
       ),
       child: Stack(
